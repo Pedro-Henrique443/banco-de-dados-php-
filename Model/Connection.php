@@ -9,7 +9,7 @@ use PDO;
 use PDOException;
 
 // BUSCANDO DADOS DE CONFIGURAÇÃO DO BANCO DE DADOS
-require __DIR__ . "../Config/configuration.php";
+require_once __DIR__ . "../../Config/configuration.php";
 
 class Connection
 {
