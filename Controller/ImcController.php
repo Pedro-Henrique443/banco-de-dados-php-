@@ -10,13 +10,13 @@ class ImcController
 {
     private $imcsModel;
 
-    public function __construct(Imcs $imcsModel)
+    public function __construct()
     {
         $this->imcsModel = new Imcs();
     }
 
     // Calculo e Classificação
-    public function calculateImc()
+    public function calculateImc($weight, $height)
     {
         try {
             $result = [];
