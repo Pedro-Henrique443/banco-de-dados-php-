@@ -11,30 +11,30 @@ class ComposerStaticInit0535228d1482d64f481d5487614e11c6
     );
 
     public static $prefixLengthsPsr4 = array (
-        'P' => 
+        'P' =>
         array (
             'Pedro\\Fitcalc\\' => 14,
         ),
-        'M' => 
+        'M' =>
         array (
             'Model\\' => 6,
         ),
-        'C' => 
+        'C' =>
         array (
             'Controller\\' => 11,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'Pedro\\Fitcalc\\' => 
+        'Pedro\\Fitcalc\\' =>
         array (
             0 => __DIR__ . '/../..' . '/fitcalc',
         ),
-        'Model\\' => 
+        'Model\\' =>
         array (
             0 => __DIR__ . '/../..' . '/Model',
         ),
-        'Controller\\' => 
+        'Controller\\' =>
         array (
             0 => __DIR__ . '/../..' . '/Controller',
         ),

@@ -10,7 +10,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
         $weight = $_POST['weight'];
         $height = $_POST['height'];
 
-        $result = round($weight / ($height * $height),2);
+        // $result = round($weight / ($height * $height),2);
 
         $imc->createImc($weight, $height, $result);
     }
