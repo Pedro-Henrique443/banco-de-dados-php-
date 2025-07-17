@@ -39,7 +39,7 @@ class User{
             $conn->bindParam(':password',$hashedPassword,PDO::PARAM_STR);
 
             // Executar tudo
-            $conn->execute();
+            return $conn->execute();
 
         } catch (PDOException $error) {
             // Exibir mensagem de erro

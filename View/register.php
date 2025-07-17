@@ -2,10 +2,11 @@
 
 require_once '../vendor/autoload.php';
 
-use Model\User;
+use Controller\UserController;
 
-$user = new User();
+$userController = new UserController();
 
+$registeruserMessage = "";
 
 if($_SERVER['REQUEST_METHOD'] === 'POST') {
     if(isset($_POST['user_fullname'],$_POST['email'],$_POST['password'])){
@@ -14,7 +15,17 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
         $email = $_POST['email'];
         $password = $_POST['password'];
 
-        $user->registerUser($user_fullname, $email, $password);
+        // $user->registerUser($user_fullname, $email, $password);
+        if($userController->checkuserbyEmail($email)){
+            $registeruserMessage = "Email já cadastrado!";
+        } else{
+            if($userController->registerUser($user_fullname,$email,$password)){
+                header('Location: ../index.php');
+                exit();
+            } else{
+                $registeruserMessage = "Erro ao registrar informado.";
+            }
+        }
     }
 };
 
@@ -113,7 +124,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
             <p class="text-center">Já tem uma conta? <a href="../index.php">Faça login aqui</a></p>
             </div>
         </form>
-        <p></p>
+        <p> <?php echo $registeruserMessage ?> </p>
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"

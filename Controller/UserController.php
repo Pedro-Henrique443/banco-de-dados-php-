@@ -22,9 +22,9 @@ class UserController
                 return false;
             }
 
-            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+            // $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-            return $this->userModel->registerUser($user_fullname, $email, $hashedPassword);
+            return $this->userModel->registerUser($user_fullname, $email, $password);
 
         } catch (Exception $error) {
             echo "Erro ao cadastrar usuário: " . $error->getMessage();
@@ -32,30 +32,53 @@ class UserController
         }
     }
 
+
+    // Email já cadastrado
+    public function checkuserbyEmail($email){
+        return $this->userModel->getUserByEmail($email);
+    }
+
+
     // Login do usuário
     public function login($email, $password)
     {
         $user = $this->userModel->getUserByEmail($email);
         
-        if ($user) {
-            if (crypt($password, $user['password'])) {
+        
+        /**
+         * $user = [
+         *    "id"=> 1,
+         * 
+         *  ]
+         * 
+         * 
+         * 
+        */ 
+        if($user && password_verify($password,$user['password'])){
                 $_SESSION['id'] = $user ['id'];
                 $_SESSION['user_fullname'] = $user['user_fullname'];
                 $_SESSION['email'] = $email['email'];
-
+                
                 return true;
-            } else{
-                return false;
-            }
         }
+
         return false;
     }
 
-    // usuário logado?
+    // usuário logado
+    public function isLoggedIn()
+    {
+        return isset($_SESSION['id']);
+    }
 
+    
+    
+    // Resgatar dados do usuário
+    public function getUserData($id,$user_fullname,$email){
+        $id = $_SESSION['id'];
 
-
-
+        return $this->userModel->getUserInfo($id, $user_fullname, $email);
+    }
 }
 
 ?>
